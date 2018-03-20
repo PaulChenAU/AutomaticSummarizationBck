@@ -20,7 +20,8 @@ sys.setdefaultencoding('utf-8')
 
 def register_blueprints(mode="normal"):
     if mode == "normal":
-        pass
+        from AutoSummarization.routes.summary import summary_bp
+        app.register_blueprint(summary_bp, url_prefix="")
 
     elif mode == "admin":
         pass
