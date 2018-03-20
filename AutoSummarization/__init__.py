@@ -1,2 +1,12 @@
-# -*- coding:utf-8 -*-
-# __author__=''
+#!/usr/bin/env python
+# coding=utf-8
+from __future__ import unicode_literals
+
+import os
+import yaml
+
+base_path = os.path.dirname(os.path.abspath(__file__))
+config = {}
+with open(base_path + "/config/config.yaml") as f:
+    config = yaml.load(f)
+

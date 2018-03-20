@@ -1,0 +1,11 @@
+debug: yes
+database:
+    connection: "mysql://xxxx:xxxxxx@127.0.0.1:3306/xxxxxxx?charset=utf8"
+    pool_size: 5
+    max_overflow: 5
+
+
+# Logging location and level
+logging:
+    file: "/tmp/your_log_name.log"
+    level: "DEBUG"

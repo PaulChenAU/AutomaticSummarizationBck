@@ -5,15 +5,9 @@ from __future__ import unicode_literals
 import time
 
 from sqlalchemy import Column
-from sqlalchemy import Integer
 from sqlalchemy import BigInteger
 from sqlalchemy import VARCHAR
 from sqlalchemy import DECIMAL
-from sqlalchemy import CHAR
-from sqlalchemy import Boolean
-from sqlalchemy import TEXT
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
