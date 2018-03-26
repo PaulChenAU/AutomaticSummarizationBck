@@ -25,3 +25,14 @@ def create_user():
         "code": "1",
         "data": res
     })
+
+
+@user_bp.route("/reset", methods=["POST"])
+def reset_password():
+    username = request.json.get("username", None)
+    old_password, new_password = request.json.get("old_password", None), request.json.get("new_password", None)
+    res = auth.reset_password(username, old_password, new_password)
+    return jsonify({
+        "code": "1",
+        "data": res
+    })
