@@ -68,7 +68,7 @@ class Summary(Base, BaseMixin, BaseId):
 
 
 class User(Base, BaseMixin):
-    __tablename__ = "users"
+    __tablename__ = "user"
 
     id = Column(BigInteger, autoincrement=True, primary_key=True)
     username = Column(VARCHAR(255))
