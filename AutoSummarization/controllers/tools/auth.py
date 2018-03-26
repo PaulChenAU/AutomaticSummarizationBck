@@ -5,6 +5,7 @@ from AutoSummarization.controllers import session_scope
 from AutoSummarization.models.entities import User
 from AutoSummarization.utils import exceptions
 from AutoSummarization.PC_tools import encrypt
+import time
 
 
 def auth_password(username, password):
@@ -12,10 +13,19 @@ def auth_password(username, password):
         query_password = db_session.query(User).filter(User.username == username).first()
         if query_password is None:
             raise exceptions.UserNotExist
-        if encrypt.auth_password(username,password):
+        if encrypt.auth_password(username, password):
             return True
     return False
 
 
-
-
+def create_user(data):
+    with session_scope() as db_session:
+        username, password = data.get("username"), data.get("password")
+        create_time = int(time.time())
+        encrypted_password = encrypt(password, create_time)
+        user = User()
+        user.username = username
+        user.password = encrypted_password
+        user.create_time = create_time
+        user.last_login_time = create_time
+        db_session.add(user)
