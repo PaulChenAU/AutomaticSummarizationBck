@@ -8,6 +8,7 @@ from sqlalchemy import Column
 from sqlalchemy import BigInteger
 from sqlalchemy import VARCHAR
 from sqlalchemy import DECIMAL
+from sqlalchemy import TEXT
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -58,12 +59,12 @@ class BaseEntity:
 
 
 class Summary(Base, BaseMixin, BaseId):
-    __tablename__ = "products"
+    __tablename__ = "summary"
 
-    name = Column(VARCHAR(255))
-    description = Column(VARCHAR(255))
-    category = Column(VARCHAR(255))
-    price = Column(DECIMAL(10, 2))
+    document = Column(TEXT)
+    summary = Column(TEXT)
+    method = Column(VARCHAR(255))
+    user_id = Column(BigInteger)
 
 
 class User(Base, BaseMixin):
