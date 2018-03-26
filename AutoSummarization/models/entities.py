@@ -72,6 +72,7 @@ class User(Base, BaseMixin):
 
     id = Column(BigInteger, autoincrement=True, primary_key=True)
     username = Column(VARCHAR(255))
+    nickname = Column(VARCHAR(255))
     password = Column(VARCHAR(255))
     create_time = Column(BigInteger)
     last_login_time = Column(BigInteger)
