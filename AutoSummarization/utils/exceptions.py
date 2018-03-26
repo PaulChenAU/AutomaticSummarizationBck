@@ -3,11 +3,17 @@
 from __future__ import unicode_literals
 
 except_dict = {
-    'LoginFailed': {
-        'code': 1,
-        'message': "LoginFailed",
-        "zh_CN": "登录失败"
-    }
+    'UserNotExist':{
+        'code': 100001,
+        'message': "User does not exist",
+        'zh_CN': "用户不存在"
+    },
+    'AuthFailed': {
+        'code': 100001,
+        'message': "authentication failed, because password is not right ",
+        'zh_CN': "验证失败,密码不正确"
+    },
+
 }
 
 

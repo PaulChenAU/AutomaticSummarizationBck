@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 
 import logging
 import logging.handlers
-from hashlib import sha256
 
 from AutoSummarization import config
 
@@ -17,10 +16,3 @@ def getLogger(name):
     logger.addHandler(watched_file_handler)
     logger.setLevel(config['logging']['level'])
     return logger
-
-
-def encrypt(password, salt):
-    _sha = sha256(password)
-    _sha.update(str(salt))
-    _sha.update(config['security']['secret_key'])
-    return _sha.hexdigest()
