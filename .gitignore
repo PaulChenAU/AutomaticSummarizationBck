@@ -11,3 +11,4 @@ apidoc/
 .idea/
 PC_tools/
 tensorflow/
+test/
