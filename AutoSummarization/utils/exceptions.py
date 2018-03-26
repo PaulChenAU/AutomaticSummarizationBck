@@ -5,14 +5,14 @@ from __future__ import unicode_literals
 except_dict = {
     'UserNotExist':{
         'code': 100001,
-        'message': "User does not exist",
+        'message': "User does not exist.",
         'zh_CN': "用户不存在"
     },
     'AuthFailed': {
         'code': 100001,
-        'message': "authentication failed, because password is not right ",
+        'message': "authentication failed, because the password is not right.",
         'zh_CN': "验证失败,密码不正确"
-    },
+    }
 
 }
 
