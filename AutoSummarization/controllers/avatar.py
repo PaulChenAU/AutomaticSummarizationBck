@@ -22,8 +22,8 @@ def search(abs_path, username):
                 if file_name[i] == ".":
                     break
             return (file_name, file_name[i + 1:])
-    return (abs_path + config["default_avatar"], config["default_type"])
+    return (abs_path + config["avatar"]["default_avatar"], config["avatar"]["default_type"])
 
 
-if __name__ == '__main__':
-    print search(config["avatar"]["abs_path"], "admin")
+# if __name__ == '__main__':
+#     # print search(config["avatar"]["abs_path"], "admin")
