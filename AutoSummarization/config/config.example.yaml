@@ -11,4 +11,5 @@ logging:
     level: "DEBUG"
 
 avatar:
-    path: "your_path/"
+    path: "/your_path"
+    abs_path: "abs_path/"
