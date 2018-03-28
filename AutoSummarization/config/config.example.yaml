@@ -13,3 +13,5 @@ logging:
 avatar:
     path: "/your_path"
     abs_path: "abs_path/"
+    default_avatar: "xxx.jpg"
+    default_type: "jpg"
