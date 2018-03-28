@@ -14,7 +14,10 @@ def auth_password(username, password):
         if query_password is None:
             raise exceptions.UserNotExist
         if encrypt.auth_password(username, password):
-            return True
+            user = query_password.to_dict(exclude_columns=["password", "create_time", "last_login_time"])
+            query_password.last_login_time = int(time.time())
+            db_session.commit()
+            return user
     return False
 
 

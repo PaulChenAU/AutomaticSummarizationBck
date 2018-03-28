@@ -22,8 +22,10 @@ def register_blueprints(mode="normal"):
     if mode == "normal":
         from AutoSummarization.routes.summary import summary_bp
         from AutoSummarization.routes.user import user_bp
+        from AutoSummarization.routes.avatar import avatar_bp
         app.register_blueprint(summary_bp, url_prefix="")
         app.register_blueprint(user_bp, url_prefix="/user")
+        app.register_blueprint(avatar_bp, url_prefix="/avatar")
 
     elif mode == "admin":
         pass
@@ -69,8 +71,9 @@ def start(mode="normal", host="127.0.0.1", port=5800):
 
 def main():
     parser = argparse.ArgumentParser(description='Start web server.')
-
+    print "1"
     args = parser.parse_args()
+    print args
     if args.action == "start":
         start(args.mode, args.host, args.port)
     elif args.action == "start_dev":
@@ -81,4 +84,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    start_dev()
