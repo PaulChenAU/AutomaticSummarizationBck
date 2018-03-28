@@ -34,6 +34,14 @@ def create_user(data):
         db_session.commit()
 
 
+def update_user(data):
+    with session_scope() as db_session:
+        username = data.get("username")
+        user = db_session.query(User).filter(User.username == username).first()
+        nickname = data.get("nickname")
+        user.nickname = nickname
+
+
 def reset_password(username, old_password, new_password):
     if encrypt.auth_password(username, old_password):
         if encrypt.reset_password(username, new_password):

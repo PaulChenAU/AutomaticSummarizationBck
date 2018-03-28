@@ -76,3 +76,4 @@ class User(Base, BaseMixin):
     password = Column(VARCHAR(255))
     create_time = Column(BigInteger)
     last_login_time = Column(BigInteger)
+    avatar_url = Column(VARCHAR(255))
