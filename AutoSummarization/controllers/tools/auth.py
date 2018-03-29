@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 # __author__=''
+from flask import g
 from AutoSummarization.PC_tools import encrypt
 from AutoSummarization.controllers import session_scope
 from AutoSummarization.models.entities import User
@@ -15,6 +16,7 @@ def auth_password(username, password):
             raise exceptions.UserNotExist
         if encrypt.auth_password(username, password):
             user = query_password.to_dict(exclude_columns=["password", "create_time", "last_login_time"])
+            g.user = user
             query_password.last_login_time = int(time.time())
             db_session.commit()
             return user
