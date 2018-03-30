@@ -11,3 +11,7 @@ def deeplearning_history():
         for sum in summary:
             ans.append(sum.to_dict())
         return ans
+
+
+def get_summary(data):
+    return None

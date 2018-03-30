@@ -12,7 +12,7 @@ summary_bp = Blueprint("summary", __name__)
 
 @summary_bp.route("/summary", methods=["POST"])
 def generate_summary():
-    data = {key: value for key, value in request.json.iteritems()}
+    data = request.json.get("data")
     res = summary.get_summary(data)
     return jsonify({
         "code": "1"
