@@ -23,9 +23,11 @@ def register_blueprints(mode="normal"):
         from AutoSummarization.routes.summary import summary_bp
         from AutoSummarization.routes.user import user_bp
         from AutoSummarization.routes.avatar import avatar_bp
+        from AutoSummarization.routes.deeplearning import deeplearning_bp
         app.register_blueprint(summary_bp, url_prefix="")
         app.register_blueprint(user_bp, url_prefix="/user")
         app.register_blueprint(avatar_bp, url_prefix="/avatar")
+        app.register_blueprint(deeplearning_bp, url_prefix="/deeplearning")
 
     elif mode == "admin":
         pass

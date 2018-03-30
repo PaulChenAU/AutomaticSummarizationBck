@@ -67,6 +67,15 @@ class Summary(Base, BaseMixin, BaseId):
     user_id = Column(BigInteger)
 
 
+class Deeplearning(Base, BaseMixin, BaseId):
+    __tablename__ = "deeplearning"
+
+    document = Column(TEXT)
+    summary = Column(TEXT)
+    method = Column(VARCHAR(255))
+    user_id = Column(BigInteger)
+
+
 class User(Base, BaseMixin):
     __tablename__ = "user"
 
