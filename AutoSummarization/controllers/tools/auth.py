@@ -45,6 +45,7 @@ def update_user(data):
         user = db_session.query(User).filter(User.username == username).first()
         nickname = data.get("nickname")
         user.nickname = nickname
+        db_session.commit()
 
 
 def reset_password(username, old_password, new_password):

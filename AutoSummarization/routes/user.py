@@ -9,7 +9,7 @@ user_bp = Blueprint("user", __name__)
 
 @user_bp.route("/login", methods=["POST"])
 def user_login():
-    data = request.json.get("data",None)
+    data = request.json.get("data", None)
     res = auth.auth_password(data.get("username"), data.get("password"))
     return jsonify({
         "code": "1",
@@ -35,4 +35,14 @@ def reset_password():
     return jsonify({
         "code": "1",
         "data": res
+    })
+
+
+@user_bp.route("/data", methods=["POST"])
+def change_user_data():
+    data = request.json.get("data", None)
+    res = auth.update_user(data)
+    return jsonify({
+        "code": "1",
+        "data": True
     })
