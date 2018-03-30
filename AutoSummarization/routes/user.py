@@ -41,8 +41,8 @@ def reset_password():
 @user_bp.route("/data", methods=["POST"])
 def change_user_data():
     data = request.json.get("data", None)
-    res = auth.update_user(data)
+    res = auth.update_user(data.get("user"))
     return jsonify({
         "code": "1",
-        "data": True
+        "data": res
     })

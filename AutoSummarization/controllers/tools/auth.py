@@ -46,6 +46,9 @@ def update_user(data):
         nickname = data.get("nickname")
         user.nickname = nickname
         db_session.commit()
+        res_user = user.to_dict(exclude_columns=["password", "create_time", "last_login_time"])
+        g.user = res_user
+        return res_user
 
 
 def reset_password(username, old_password, new_password):
