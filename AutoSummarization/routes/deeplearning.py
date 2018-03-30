@@ -24,5 +24,6 @@ def generate_summary():
     data = request.json.get("data")
     res = deeplearning.get_summary(data)
     return jsonify({
-        "code": "1"
+        "code": "1",
+        "data": res
     })
