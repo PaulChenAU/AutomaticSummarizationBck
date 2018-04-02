@@ -1,3 +1,5 @@
+# -*- coding:utf-8 -*-
+# __author__=''
 import io, os, sys, types
 from IPython import get_ipython
 from nbformat import read
