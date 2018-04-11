@@ -13,7 +13,6 @@ from AutoSummarization import config
 from AutoSummarization import utils
 from AutoSummarization.app import app
 
-
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -24,10 +23,12 @@ def register_blueprints(mode="normal"):
         from AutoSummarization.routes.user import user_bp
         from AutoSummarization.routes.avatar import avatar_bp
         from AutoSummarization.routes.deeplearning import deeplearning_bp
+        from AutoSummarization.routes.textrank import textrank_bp
         app.register_blueprint(summary_bp, url_prefix="")
         app.register_blueprint(user_bp, url_prefix="/user")
         app.register_blueprint(avatar_bp, url_prefix="/avatar")
         app.register_blueprint(deeplearning_bp, url_prefix="/deeplearning")
+        app.register_blueprint(textrank_bp, url_prefix="/textrank")
 
     elif mode == "admin":
         pass
