@@ -9,6 +9,7 @@ from sqlalchemy import BigInteger
 from sqlalchemy import VARCHAR
 from sqlalchemy import DECIMAL
 from sqlalchemy import TEXT
+from sqlalchemy import FLOAT
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -69,6 +70,15 @@ class Summary(Base, BaseMixin, BaseId):
 
 class Deeplearning(Base, BaseMixin, BaseId):
     __tablename__ = "deeplearning"
+
+    document = Column(TEXT)
+    summary = Column(TEXT)
+    method = Column(VARCHAR(255))
+    user_id = Column(BigInteger)
+
+
+class Textrank(Base, BaseMixin, BaseId):
+    __tablename__ = "textrank"
 
     document = Column(TEXT)
     summary = Column(TEXT)

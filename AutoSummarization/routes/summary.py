@@ -7,6 +7,7 @@ from flask import jsonify
 from flask import request
 from AutoSummarization.controllers import summary
 
+
 summary_bp = Blueprint("summary", __name__)
 
 
@@ -15,5 +16,6 @@ def generate_summary():
     data = request.json.get("data")
     res = summary.get_summary(data)
     return jsonify({
-        "code": "1"
+        "code": "1",
+        "data": res
     })
