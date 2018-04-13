@@ -27,7 +27,9 @@ def textrank_history():
 
 
 def get_summary(data):
-    return None
+    res = ",".join(_get_summary(data))
+    res += "。"
+    return res
 
 
 def textrank_stemming(doc):
@@ -93,11 +95,6 @@ def whole_similarity(word_lists):
     return res
 
 
-# TODO
-def get_similarity_topn(similarity_lists, topn):
-    pass
-
-
 def textrank(sentences_similarity_lists, init_sentence_ws, d):
     # i represents the sentence number
     for i in range(len(sentences_similarity_lists)):
@@ -117,10 +114,39 @@ def textrank(sentences_similarity_lists, init_sentence_ws, d):
 
 def textrank_converge(sentences_similarity_lists, d):
     init_sentence_ws = [1 for i in range(len(sentences_similarity_lists))]
-    for i in range(1000):
+    for i in range(100):
         last_sum = sum(init_sentence_ws)
         new_ws = textrank(sentences_similarity_lists, init_sentence_ws, d)
         new_sum = sum(new_ws)
-        print new_sum - last_sum
         init_sentence_ws = new_ws
+    return init_sentence_ws
 
+
+def get_topn(init_sentence_ws, topn):
+    res = []
+    for i in range(len(init_sentence_ws)):
+        res.append((init_sentence_ws[i], i))
+    sres = sorted(res, key=lambda x: x[0], reverse=True)
+    return sres[:topn]
+
+
+def _get_summary(data):
+    sentences_list = textrank_stemming(data)
+    word_lists = textrank_participle(sentences_list)
+    similarity = whole_similarity(word_lists)
+    sentece_ws = textrank_converge(similarity, d=0.85)
+    topn = get_topn(sentece_ws, topn=int(len(sentences_list)/2))
+    print topn
+    stopn = sorted(topn, key=lambda x: x[1])
+    sans = []
+    for i in range(len(stopn)):
+        sans.append(sentences_list[stopn[i][1]])
+    print sans
+    return sans
+
+
+if __name__ == '__main__':
+    doc = '前面提到计算两个网页之间的互相引用的次数从而得打网页的重要性，那么句子之间的连续如何建立了？传统的方法是比较句子中相同单词的个数，比如“I am a dog”,"you are a dog"这两个句子有连个相同的单词"a","dog"。这两个单词同属于两个句子，因此S(si,sj)=2/log(4)+log(4)。这种传统的句子相似性在某种程度上使句子之间建立起了联系，但是单词的词性，单词的近义词，反义词等诸多因素都未考虑进去，因此这种计算句子之间相似性的方法并不优秀。但是它却比起之前的词频法和tf*idf的方法有了很大的进步。'
+    print doc
+    print "====="
+    print get_summary(doc)
