@@ -12,3 +12,4 @@ Pillow==5.0.0
 gevent_websocket==0.10.1
 pyPdf==1.13
 PyYAML==3.12
+zhon==1.1.5
