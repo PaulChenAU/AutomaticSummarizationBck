@@ -4,6 +4,7 @@ from AutoSummarization.models.entities import Textrank
 from AutoSummarization.controllers import session_scope
 from zhon.hanzi import punctuation
 import re
+import math
 import jieba.posseg as pseg
 
 property_list = ["a", "an", "n", "v"]
@@ -53,5 +54,29 @@ def textrank_participle(sentences_list):
 
         res.append(part_res)
     return res
+
+
+def _get_similarity(wordlista, wordlistb):
+    count = 0.0
+    for worda in wordlista:
+        if worda in wordlistb:
+            count += 1
+    base = math.log(len(wordlista), 2) + math.log(len(wordlistb), 2)
+    return count / base if base != 0 else 0.0
+
+
+def get_sentence_similarity(word_lists):
+    res = []
+    for i in range(0, len(word_lists) - 1):
+        for j in range(i + 1, len(word_lists)):
+            res.append((_get_similarity(word_lists[i], word_lists[j]), i, j))
+
+    return res
+
+
+# TODO
+def get_similarity_topn(similarity_lists, topn):
+    pass
+
 
 
