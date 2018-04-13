@@ -6,6 +6,8 @@ from zhon.hanzi import punctuation
 import re
 import jieba.posseg as pseg
 
+property_list = ["a", "an", "n", "v"]
+
 
 # TODO punctuation add
 
@@ -46,7 +48,7 @@ def textrank_participle(sentences_list):
         part = pseg.cut(sentence)
         part_res = []
         for word, property in part:
-            if property == "a" or property == "an" or property == "n" or property == "v":
+            if property in property_list:
                 part_res.append(word)
 
         res.append(part_res)
