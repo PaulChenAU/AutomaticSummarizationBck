@@ -28,7 +28,7 @@ def textrank_history():
 
 def get_summary(data):
     res = ",".join(_get_summary(data))
-    res += "。"
+    res += "."
     return res
 
 
@@ -60,6 +60,8 @@ def textrank_participle(sentences_list):
 
 # TODO change base
 def _get_similarity(wordlista, wordlistb):
+    if len(wordlista) == 0 or len(wordlistb) == 0:
+        return 0.0
     count = 0.0
     for worda in wordlista:
         if worda in wordlistb:
@@ -135,18 +137,10 @@ def _get_summary(data):
     word_lists = textrank_participle(sentences_list)
     similarity = whole_similarity(word_lists)
     sentece_ws = textrank_converge(similarity, d=0.85)
-    topn = get_topn(sentece_ws, topn=int(len(sentences_list)/2))
-    print topn
+    topn = get_topn(sentece_ws, topn=int(len(sentences_list) / 2))
     stopn = sorted(topn, key=lambda x: x[1])
     sans = []
     for i in range(len(stopn)):
         sans.append(sentences_list[stopn[i][1]])
-    print sans
     return sans
 
-
-if __name__ == '__main__':
-    doc = '前面提到计算两个网页之间的互相引用的次数从而得打网页的重要性，那么句子之间的连续如何建立了？传统的方法是比较句子中相同单词的个数，比如“I am a dog”,"you are a dog"这两个句子有连个相同的单词"a","dog"。这两个单词同属于两个句子，因此S(si,sj)=2/log(4)+log(4)。这种传统的句子相似性在某种程度上使句子之间建立起了联系，但是单词的词性，单词的近义词，反义词等诸多因素都未考虑进去，因此这种计算句子之间相似性的方法并不优秀。但是它却比起之前的词频法和tf*idf的方法有了很大的进步。'
-    print doc
-    print "====="
-    print get_summary(doc)
