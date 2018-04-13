@@ -22,8 +22,11 @@ def textrank_summary():
 @textrank_bp.route("/summary", methods=["POST"])
 def generate_summary():
     data = request.json.get("data")
-    res = textrank.get_summary(data)
+    document = data.get("data").get("document")
+    res = textrank.get_summary(document)
     return jsonify({
         "code": "1",
-        "data": res
+        "data": {
+            "summary": res
+        }
     })
