@@ -27,8 +27,16 @@ def textrank_history():
 
 
 def get_summary(data):
-    res = ",".join(_get_summary(data))
+    res = ",".join(_get_summary(data.get("document")))
     res += "."
+    with session_scope() as db_session:
+        textrank = Textrank()
+        textrank.document = data.get("document")
+        textrank.method = "textrank"
+        textrank.summary = res
+        textrank.user_id = data.get('id')
+        db_session.add(textrank)
+
     return res
 
 
@@ -143,4 +151,3 @@ def _get_summary(data):
     for i in range(len(stopn)):
         sans.append(sentences_list[stopn[i][1]])
     return sans
-
