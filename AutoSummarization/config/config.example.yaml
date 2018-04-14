@@ -15,3 +15,5 @@ avatar:
     abs_path: "abs_path/"
     default_avatar: "xxx.jpg"
     default_type: "jpg"
+
+secret_key: "xxxxxxx"
