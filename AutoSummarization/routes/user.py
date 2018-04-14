@@ -2,7 +2,7 @@
 # __author__=''
 from AutoSummarization.controllers.tools import auth
 from flask import request, Blueprint, jsonify
-from flask import g
+from flask import g, session
 
 user_bp = Blueprint("user", __name__)
 
@@ -11,6 +11,9 @@ user_bp = Blueprint("user", __name__)
 def user_login():
     data = request.json.get("data", None)
     res = auth.auth_password(data.get("username"), data.get("password"))
+    if res is not False:
+        print "yes"
+        session["user"] = res
     return jsonify({
         "code": "1",
         "data": res

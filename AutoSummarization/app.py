@@ -9,9 +9,11 @@ from flask import jsonify
 from AutoSummarization import utils
 from AutoSummarization.utils.exceptions import HttpException
 from datetime import timedelta
+from AutoSummarization import config
 
 logger = utils.getLogger(__name__)
 app = Flask("AutoSummarization")
+app.config["SECRET_KEY"] = config["secret_key"]
 CORS(app, supports_credentials=True)
 app.permanent_session_lifetime = timedelta(days=7)
 
