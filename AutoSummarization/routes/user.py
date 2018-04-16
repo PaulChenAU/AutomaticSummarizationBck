@@ -12,7 +12,6 @@ def user_login():
     data = request.json.get("data", None)
     res = auth.auth_password(data.get("username"), data.get("password"))
     if res is not False:
-        print "yes"
         session["user"] = res
     return jsonify({
         "code": "1",
