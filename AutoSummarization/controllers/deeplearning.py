@@ -4,9 +4,9 @@ from AutoSummarization.models.entities import Deeplearning
 from AutoSummarization.controllers import session_scope
 
 
-def deeplearning_history():
+def deeplearning_history(user):
     with session_scope() as db_session:
-        summary = db_session.query(Deeplearning).all()
+        summary = db_session.query(Deeplearning).filter(Deeplearning.user_id == user["id"]).all()
         ans = []
         for sum in summary:
             ans.append(sum.to_dict())
