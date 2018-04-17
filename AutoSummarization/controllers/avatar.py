@@ -23,7 +23,3 @@ def search(abs_path, username, avatar_size):
                     break
             return (file_name, file_name[i + 1:])
     return (config["avatar"]["default_avatar"], config["avatar"]["default_type"])
-
-
-# if __name__ == '__main__':
-#     # print search(config["avatar"]["abs_path"], "admin")
