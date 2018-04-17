@@ -24,9 +24,11 @@ def deeplearning_summary():
 
 @deeplearning_bp.route("/summary", methods=["POST"])
 def generate_summary():
-    data = request.json.get("data")
+    data = request.json.get("data").get("data")
     res = deeplearning.get_summary(data)
     return jsonify({
         "code": "1",
-        "data": res
+        "data": {
+            "summary": res
+        }
     })

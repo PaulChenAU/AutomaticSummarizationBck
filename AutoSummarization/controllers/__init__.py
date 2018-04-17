@@ -21,6 +21,8 @@ engine = create_engine(
 Session = sessionmaker(bind=engine)
 
 
+
+
 @contextmanager
 def session_scope():
     """Provide a transactional scope around a series of operations.

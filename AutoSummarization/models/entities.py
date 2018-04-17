@@ -4,6 +4,9 @@ from __future__ import unicode_literals
 
 import time
 
+from AutoSummarization.controllers import engine
+
+from sqlalchemy import MetaData
 from sqlalchemy import Column
 from sqlalchemy import BigInteger
 from sqlalchemy import VARCHAR
@@ -96,3 +99,6 @@ class User(Base, BaseMixin):
     create_time = Column(BigInteger)
     last_login_time = Column(BigInteger)
     avatar_url = Column(VARCHAR(255))
+
+# for create table
+# Base.metadata.create_all(engine)
