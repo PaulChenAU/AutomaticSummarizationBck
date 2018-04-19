@@ -13,11 +13,16 @@ textrank_bp = Blueprint("textrank", __name__)
 
 @textrank_bp.route("/history", methods=["POST"])
 def textrank_summary():
+    data = request.json.get("data")
+    page = data.get("page", 0)
+    count = data.get("count")
+    if count is not None:
+        start = (page - 1) * count
+        end = start + count
+        res = textrank.textrank_history_page(session["user"], start, end)
+    else:
+        res = textrank.textrank_history(data)
 
-    data = request.json.get("data").get("data")
-    start = data.get("start", 0)
-    count = data.get("count", None)
-    res = textrank.textrank_history_page(data, start, count)
     return jsonify({
         "code": "1",
         "data": {
