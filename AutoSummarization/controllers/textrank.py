@@ -28,7 +28,6 @@ def textrank_history(user):
 
 def get_summary(data):
     res = ",".join(_get_summary(data.get("document")))
-    res += "."
     with session_scope() as db_session:
         textrank = Textrank()
         textrank.document = data.get("document")
