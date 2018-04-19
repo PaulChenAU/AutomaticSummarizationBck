@@ -12,13 +12,17 @@ property_list = ["a", "an", "n", "v"]
 
 # TODO punctuation add
 
-def textrank_history(user):
+def textrank_history(data):
     with session_scope() as db_session:
-        summary = db_session.query(Textrank).filter(Textrank.user_id == user["id"]).all()
+        summary = db_session.query(Textrank).filter(Textrank.user_id == data["id"]).all()
         ans = []
         for sum in summary:
             ans.append(sum.to_dict())
         return ans
+
+
+def textrank_history_page(data, start, count):
+    pass
 
 
 """
