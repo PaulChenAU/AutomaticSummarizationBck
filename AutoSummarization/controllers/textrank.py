@@ -6,6 +6,7 @@ from zhon.hanzi import punctuation
 import re
 import math
 import jieba.posseg as pseg
+from sqlalchemy import func
 
 property_list = ["a", "an", "n", "v"]
 
@@ -14,15 +15,30 @@ property_list = ["a", "an", "n", "v"]
 
 def textrank_history(data):
     with session_scope() as db_session:
+        res = {}
+        sum = db_session.query(func.count(Textrank.id)).scalar()
         summary = db_session.query(Textrank).filter(Textrank.user_id == data["id"]).all()
         ans = []
-        for sum in summary:
-            ans.append(sum.to_dict())
+        for _summary in summary:
+            ans.append(_summary.to_dict())
+        res["sum"] = sum
+        res["data"] = ans
+
         return ans
 
 
-def textrank_history_page(data, start, count):
-    pass
+def textrank_history_page(data, start, end):
+    with session_scope() as db_session:
+        res = {}
+        sum = db_session.query(func.count(Textrank.id)).scalar()
+        summary = db_session.query(Textrank).filter(Textrank.user_id == data["id"]).slice(start, end).all()
+        ans = []
+        for _summary in summary:
+            ans.append(_summary.to_dict())
+        res["sum"] = sum
+        res["data"] = ans
+
+        return res
 
 
 """
@@ -154,3 +170,9 @@ def _get_summary(data):
     for i in range(len(stopn)):
         sans.append(sentences_list[stopn[i][1]])
     return sans
+
+if __name__ == '__main__':
+    data = {
+        "id": 1
+    }
+    print textrank_history_page(data, 1 ,2)
