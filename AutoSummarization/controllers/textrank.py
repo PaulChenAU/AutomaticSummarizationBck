@@ -46,14 +46,17 @@ def textrank_history_page(data, start, end):
 """
 
 
-def get_summary(data, compress_rate_val):
+def get_summary(data, compress_rate):
+    compress_rate_val = float(compress_rate[:len(compress_rate) - 1]) / 100
     res = ",".join(_get_summary(data.get("document"), compress_rate_val))
+
     with session_scope() as db_session:
         textrank = Textrank()
         textrank.document = data.get("document")
         textrank.method = "textrank"
         textrank.summary = res
         textrank.user_id = data.get('id')
+        textrank.compress_rate = compress_rate
         db_session.add(textrank)
 
     return res

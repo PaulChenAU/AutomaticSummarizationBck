@@ -46,8 +46,7 @@ def get_textrank_summary():
 def generate_summary():
     data = request.json.get("data").get("data")
     compress_rate = request.json.get("data").get("compressrate", "50%")
-    compress_rate_val = float(compress_rate[:len(compress_rate)-1]) / 100
-    res = textrank.get_summary(data, compress_rate_val)
+    res = textrank.get_summary(data, compress_rate)
     return jsonify({
         "code": "1",
         "data": {
