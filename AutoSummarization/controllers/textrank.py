@@ -46,8 +46,8 @@ def textrank_history_page(data, start, end):
 """
 
 
-def get_summary(data):
-    res = ",".join(_get_summary(data.get("document")))
+def get_summary(data, compress_rate_val):
+    res = ",".join(_get_summary(data.get("document"), compress_rate_val))
     with session_scope() as db_session:
         textrank = Textrank()
         textrank.document = data.get("document")
@@ -159,20 +159,14 @@ def get_topn(init_sentence_ws, topn):
     return sres[:topn]
 
 
-def _get_summary(data):
+def _get_summary(data, compress_rate_val):
     sentences_list = textrank_stemming(data)
     word_lists = textrank_participle(sentences_list)
     similarity = whole_similarity(word_lists)
     sentece_ws = textrank_converge(similarity, d=0.85)
-    topn = get_topn(sentece_ws, topn=int(len(sentences_list) / 2))
+    topn = get_topn(sentece_ws, topn=int(len(sentences_list) * compress_rate_val))
     stopn = sorted(topn, key=lambda x: x[1])
     sans = []
     for i in range(len(stopn)):
         sans.append(sentences_list[stopn[i][1]])
     return sans
-
-if __name__ == '__main__':
-    data = {
-        "id": 1
-    }
-    print textrank_history_page(data, 1 ,2)
