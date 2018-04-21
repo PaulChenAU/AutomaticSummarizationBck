@@ -9,7 +9,7 @@ from AutoSummarization.controllers import engine
 from sqlalchemy import MetaData
 from sqlalchemy import Column
 from sqlalchemy import BigInteger
-from sqlalchemy import VARCHAR
+from sqlalchemy import VARCHAR, CHAR
 from sqlalchemy import DECIMAL
 from sqlalchemy import TEXT
 from sqlalchemy import FLOAT
@@ -87,6 +87,7 @@ class Textrank(Base, BaseMixin, BaseId):
     summary = Column(TEXT)
     method = Column(VARCHAR(255))
     user_id = Column(BigInteger)
+    compress_rate = Column(CHAR(15))
 
 
 class User(Base, BaseMixin):
