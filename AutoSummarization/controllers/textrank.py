@@ -5,6 +5,7 @@ from AutoSummarization.controllers import session_scope
 from zhon.hanzi import punctuation
 import re
 import math
+import time
 import jieba.posseg as pseg
 from sqlalchemy import func
 
@@ -55,6 +56,7 @@ def get_summary(data, compress_rate):
         textrank.document = data.get("document")
         textrank.method = "textrank"
         textrank.summary = res
+        textrank.create_time = int(time.time())
         textrank.user_id = data.get('id')
         textrank.compress_rate = compress_rate
         db_session.add(textrank)
