@@ -88,6 +88,18 @@ class Textrank(Base, BaseMixin, BaseId):
     method = Column(VARCHAR(255))
     user_id = Column(BigInteger)
     compress_rate = Column(CHAR(15))
+    create_time = Column(BigInteger)
+
+
+class Mmr(Base, BaseMixin, BaseId):
+    __tablename__ = "mmr"
+
+    document = Column(TEXT)
+    summary = Column(TEXT)
+    method = Column(VARCHAR(255))
+    user_id = Column(BigInteger)
+    compress_rate = Column(CHAR(15))
+    create_time = Column(BigInteger)
 
 
 class User(Base, BaseMixin):
@@ -101,5 +113,5 @@ class User(Base, BaseMixin):
     last_login_time = Column(BigInteger)
     avatar_url = Column(VARCHAR(255))
 
-# for create table
-# Base.metadata.create_all(engine)
+    # for create table
+    # Base.metadata.create_all(engine)
