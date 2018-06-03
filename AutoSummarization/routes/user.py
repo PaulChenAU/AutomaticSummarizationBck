@@ -10,6 +10,7 @@ user_bp = Blueprint("user", __name__)
 @user_bp.route("/login", methods=["POST"])
 def user_login():
     data = request.json.get("data", None)
+    print (data)
     res = auth.auth_password(data.get("username"), data.get("password"))
     if res is not False:
         session["user"] = res
