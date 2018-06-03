@@ -56,4 +56,3 @@ def reset_password(username, old_password, new_password):
         if encrypt.reset_password(username, new_password):
             return True
     return False
-

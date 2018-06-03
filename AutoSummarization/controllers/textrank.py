@@ -65,7 +65,7 @@ def get_summary(data, compress_rate):
 
 
 def textrank_stemming(doc):
-    sentences = re.sub(ur"[%s]+" % punctuation, "\n", doc)
+    sentences = re.sub(r"[%s]+" % punctuation, "\n", doc)
     sentences_list = []
     append_sen = ""
     for sen in sentences:
