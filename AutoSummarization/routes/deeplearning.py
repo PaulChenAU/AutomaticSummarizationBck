@@ -22,6 +22,26 @@ def deeplearning_summary():
     })
 
 
+@deeplearning_bp.route("/history", methods=["POST"])
+def deeplearning_summary_page():
+    data = request.json.get("data")
+    page = data.get("page", 0)
+    count = data.get("count")
+    if count is not None:
+        start = (page - 1) * count
+        end = start + count
+        res = deeplearning.deeplearning_history_page(session["user"], start, end)
+    else:
+        res = deeplearning.deeplearning_history(data)
+
+    return jsonify({
+        "code": "1",
+        "data": {
+            "history": res
+        }
+    })
+
+
 @deeplearning_bp.route("/summary", methods=["POST"])
 def generate_summary():
     data = request.json.get("data").get("data")

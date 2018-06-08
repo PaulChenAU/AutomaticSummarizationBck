@@ -5,8 +5,9 @@ from __future__ import unicode_literals
 from flask import Blueprint
 from flask import jsonify
 from flask import request
-from flask import g, session
-from AutoSummarization.controllers import textrank
+from flask import session
+
+from AutoSummarization.controllers.extraction import textrank
 
 textrank_bp = Blueprint("textrank", __name__)
 

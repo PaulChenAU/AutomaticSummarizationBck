@@ -5,8 +5,9 @@ from __future__ import unicode_literals
 from flask import Blueprint
 from flask import jsonify
 from flask import request
-from flask import g, session
-from AutoSummarization.controllers import mmr
+from flask import session
+
+from AutoSummarization.controllers.extraction import mmr
 
 mmr_bp = Blueprint("mmr", __name__)
 
