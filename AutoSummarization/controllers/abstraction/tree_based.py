@@ -24,11 +24,11 @@ class SentenceTree():
 
 class WordNode():
     def __init__(self, word_pair):
-        self.word, self.property = word_pair
+        self.word, self.prop = word_pair
         self.next = None
 
     def __str__(self):
-        return "word:%s, property:%s " % (self.word, self.property)
+        return "word:%s, property:%s " % (self.word, self.prop)
 
     __repr__ = __str__
 
@@ -37,6 +37,14 @@ class WordList():
     def __init__(self, sentence):
         ps = psg.cut(sentence, HMM=False)
         self.word_list = [word_pair for word_pair in ps]
+        self.head = WordNode(self.word_list[0])
+        cur = self.head
+        for i in range(1, len(self.word_list)):
+            word_node = WordNode(self.word_list[i])
+            cur.next = word_node
+            cur = word_node
+
+    def reset_word_node(self):
         self.head = WordNode(self.word_list[0])
         cur = self.head
         for i in range(1, len(self.word_list)):
@@ -54,6 +62,41 @@ class WordList():
             cur = cur.next
         return ""
 
+    @property
+    def whole_property_list(self):
+        res = []
+        for word_pair in self.word_list:
+            word, prop = word_pair
+            res.append(prop)
+        return res
+
+    @property
+    def property_list(self):
+        cur = self.head
+        res = []
+        while cur != None:
+            res.append(cur.prop)
+            cur = cur.next
+        return res
+
+    @property
+    def whole_word_list(self):
+        res = []
+        for word_pair in self.word_list:
+            word, prop = word_pair
+            res.append(word)
+        return res
+
+    @property
+    def word_list(self):
+        cur = self.head
+        res = []
+        while cur != None:
+            res.append(cur.word)
+            cur = cur.next
+        return res
+
+
 
 class SentenceTree():
     def __init__(self, sentence):
@@ -67,3 +110,4 @@ if __name__ == '__main__':
     for sentence in s:
         wl = WordList(sentence)
         print(wl)
+        print(wl.property_list)
