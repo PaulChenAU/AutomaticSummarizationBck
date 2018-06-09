@@ -14,14 +14,6 @@ class Tree():
         pass
 
 
-class SentenceTree():
-    def __init__(self, sentence):
-        self.gen_sentence_tree(sentence)
-
-    def gen_sentence_tree(self, sentence):
-        pass
-
-
 class WordNode():
     def __init__(self, word_pair):
         self.word, self.prop = word_pair
@@ -33,22 +25,22 @@ class WordNode():
     __repr__ = __str__
 
 
-class WordList():
+class SentenceTree():
     def __init__(self, sentence):
         ps = psg.cut(sentence, HMM=False)
-        self.word_list = [word_pair for word_pair in ps]
-        self.head = WordNode(self.word_list[0])
+        self.words = [word_pair for word_pair in ps]
+        self.head = WordNode(self.words[0])
         cur = self.head
-        for i in range(1, len(self.word_list)):
-            word_node = WordNode(self.word_list[i])
+        for i in range(1, len(self.words)):
+            word_node = WordNode(self.words[i])
             cur.next = word_node
             cur = word_node
 
     def reset_word_node(self):
-        self.head = WordNode(self.word_list[0])
+        self.head = WordNode(self.words[0])
         cur = self.head
-        for i in range(1, len(self.word_list)):
-            word_node = WordNode(self.word_list[i])
+        for i in range(1, len(self.words)):
+            word_node = WordNode(self.words[i])
             cur.next = word_node
             cur = word_node
 
@@ -65,7 +57,7 @@ class WordList():
     @property
     def whole_property_list(self):
         res = []
-        for word_pair in self.word_list:
+        for word_pair in self.words:
             word, prop = word_pair
             res.append(prop)
         return res
@@ -82,7 +74,7 @@ class WordList():
     @property
     def whole_word_list(self):
         res = []
-        for word_pair in self.word_list:
+        for word_pair in self.words:
             word, prop = word_pair
             res.append(word)
         return res
@@ -98,16 +90,12 @@ class WordList():
 
 
 
-class SentenceTree():
-    def __init__(self, sentence):
-        ps = psg.cut(sentence, HMM=False)
-        word_list = [word_pair for word_pair in ps]
 
 
 if __name__ == '__main__':
     sentence = "调查负责人、一妇婴妇幼保健部主任花静介绍,根据2010年国民体质监测数据显示,上海市3至6岁学龄前儿童超重、肥胖率分别为15.98%和11.15%,两个数值均有所下降,,这个数据的变化跟近年来的政策引导、保健科普和观念改变有关,‘大胖小子’不再是公众追求,上海家庭在育儿方式上更科学,对健康的关注度也更高,,但同时值得注意的是,在运动能力上,肥胖和超重儿童在运动控制（大运动能力）、精细运动/书写能力、一般协调性、总体运动能力上均低于正常组,"
     s = document_cutting(sentence)
     for sentence in s:
-        wl = WordList(sentence)
+        wl = SentenceTree(sentence)
         print(wl)
         print(wl.property_list)
