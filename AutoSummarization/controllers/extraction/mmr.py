@@ -9,6 +9,7 @@ from AutoSummarization.classes.vocab_repository import VocabRepository
 from AutoSummarization.classes.vocab_tokenizer import VocabTokenizer
 from AutoSummarization.classes.calculate_similarity import CalculateSimilarity
 from zhon.hanzi import punctuation
+from AutoSummarization.controllers.tools.hanzi_edit import stops
 import re
 import math
 import time
@@ -46,7 +47,7 @@ def mmr_history_page(data, start, end):
 
 def get_summary(data, compress_rate):
     compress_rate_val = float(compress_rate[:len(compress_rate) - 1]) / 100
-    sentences_list = stemming(data.get("document"))
+    sentences_list = document_cutting(data.get("document"))
     summary_list = _get_summary(sentences_list, compress_rate_val)
     ans = []
     for sentence in sentences_list:
@@ -68,8 +69,8 @@ def get_summary(data, compress_rate):
     return res
 
 
-def stemming(document):
-    sentences = re.sub(r"[%s]+" % punctuation, "\n", document)
+def document_cutting(document):
+    sentences = re.sub(r"[%s]+" % stops, "\n", document)
     sentences_list = []
     append_sen = ""
     for sen in sentences:
