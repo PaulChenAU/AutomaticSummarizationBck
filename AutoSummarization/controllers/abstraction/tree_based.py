@@ -88,8 +88,32 @@ class SentenceTree():
             cur = cur.next
         return res
 
+    def remove_node(self, node):
+        if node is self.head:
+            self.head = self.head.next
+        else:
+            pre = self.head
+            cur = pre.next
+            while cur != None:
+                if cur is node:
+                    pre.next = cur.next
+                    break
+                else:
+                    pre = cur
+                    cur = pre.next
+        return self.head
 
+    def get_node(self):
+        cur = self.head
+        while cur != None:
+            if cur.prop == 'n':
+                cur = self.remove_node(cur)
+            else:
+                cur = cur.next
 
+    """ This methhod aims to simplify the sentence in order to get summary """
+    def deduction(self):
+        pass
 
 
 if __name__ == '__main__':
@@ -97,5 +121,5 @@ if __name__ == '__main__':
     s = document_cutting(sentence)
     for sentence in s:
         wl = SentenceTree(sentence)
-        print(wl)
+        print(wl.word_list)
         print(wl.property_list)
