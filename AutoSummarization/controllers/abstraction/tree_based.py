@@ -4,6 +4,7 @@ from AutoSummarization.controllers.extraction.mmr import document_cutting
 from AutoSummarization.controllers.tools.hanzi_edit import stops
 import jieba
 import jieba.posseg as psg
+import math
 
 
 class Tree():
@@ -112,8 +113,45 @@ class SentenceTree():
                 cur = cur.next
 
     """ This methhod aims to simplify the sentence in order to get summary """
+
     def deduction(self):
         pass
+
+    def calculate_whole_entropy(self):
+        prob = {}
+        res = {}
+        for item in set(self.whole_property_list):
+            res[item] = self.whole_property_list.count(item)
+
+        sums = sum(res[item] for item in res.keys())
+        for item in res.keys():
+            prob[item] = res[item] / sums
+
+        entropy = 0.0
+        for item in prob.keys():
+            entropy += - prob[item] * math.log(prob[item], 2)
+        return entropy
+
+    def calculate_entropy(self):
+        prob = {}
+        res = {}
+        cur = self.head
+        prop_list = []
+        while cur != None:
+            prop_list.append(cur.prop)
+            cur = cur.next
+
+        for item in set(prop_list):
+            res[item] = prop_list.count(item)
+
+        sums = sum(res[item] for item in res.keys())
+        for item in res.keys():
+            prob[item] = res[item] / sums
+
+        entropy = 0.0
+        for item in prob.keys():
+            entropy += - prob[item] * math.log(prob[item], 2)
+        return entropy
 
 
 if __name__ == '__main__':
@@ -123,3 +161,5 @@ if __name__ == '__main__':
         wl = SentenceTree(sentence)
         print(wl.word_list)
         print(wl.property_list)
+        print(wl.calculate_whole_entropy())
+        print(wl.calculate_entropy())
